@@ -13,11 +13,11 @@ export class CustomerLoginUseCase {
     const customer = await this.customerRepository.findByEmail(request.email);
 
     if (!customer) {
-      throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+      throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
     }
 
     if (!customer.isActive) {
-      throw new Error('تم تعطيل الحساب.');
+      throw new Error('تم تعطيل الحساب');
     }
 
     // if (!customer.isEmailVerified) {
@@ -25,12 +25,12 @@ export class CustomerLoginUseCase {
     // }
 
     if (!customer.isEmailVerified) {
-      throw new Error('يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول. تحقق من بريدك الإلكتروني للحصول على رابط التحقق.');
+      throw new Error('يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول. تحقق من بريدك الإلكتروني للحصول على رابط التحقق');
     }
 
     const isPasswordValid = await this.passwordHasher.compare(request.password, customer.password);
     if (!isPasswordValid) {
-      throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+      throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
     }
 
     const jwtPayload: JWTpayload = {

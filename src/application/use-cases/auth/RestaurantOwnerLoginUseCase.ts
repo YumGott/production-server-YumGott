@@ -15,7 +15,7 @@ export class RestaurantOwnerLoginUseCase {
         const restaurantOwner = await this.restaurantOwnerRepository.findByEmail(request.email);
 
         if (!restaurantOwner) {
-            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
         }
 
         // if (!restaurantOwner.isEmailVerified) {
@@ -24,7 +24,7 @@ export class RestaurantOwnerLoginUseCase {
 
         const isPasswordValid = await this.passwordHasher.compare(request.password, restaurantOwner.password);
         if (!isPasswordValid) {
-            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
         }
 
         const jwtPayload: JWTpayload = {

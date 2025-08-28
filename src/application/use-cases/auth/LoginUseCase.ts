@@ -26,11 +26,11 @@ export class LoginUseCase {
         let user: Customer | RestaurantOwner | null = customer || restaurantOwner;
 
         if (!user) {
-            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
         }
 
         if (!user.isActive) {
-            throw new Error('تم تعطيل الحساب.');
+            throw new Error('تم تعطيل الحساب');
         }
 
         // if (!user.isEmailVerified) {
@@ -40,7 +40,7 @@ export class LoginUseCase {
         // Check password
         const isPasswordValid = await this.passwordHasher.compare(request.password, user.password);
         if (!isPasswordValid) {
-            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
         }
 
         // Generate Token
