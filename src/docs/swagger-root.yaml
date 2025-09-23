@@ -11,6 +11,8 @@ servers:
     description: Production server
   - url: https://yum-gott.onrender.com
     description: Development server
+  - url: https://production-server-yumgott.onrender.com
+    description: Production server
 
 # Paths
 paths:
@@ -122,6 +124,12 @@ paths:
                       example: "PAYMENT_X"
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /api/orders:
+    $ref: './paths-orders.yaml#/paths/~1orders'
+  /api/orders/{orderId}:
+    $ref: './paths-orders.yaml#/paths/~1orders~1{orderId}'
+  /api/orders/{orderId}/status:
+    $ref: './paths-orders.yaml#/paths/~1orders~1{orderId}~1status'
 
 components:
   securitySchemes:
