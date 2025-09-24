@@ -11,9 +11,33 @@ export class EmailService {
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-      }
+      },
+      tls: {
+        rejectUnauthorized: false
+      },
+      debug: true,
+      logger: true
     });
+    console.log('Email Debug Info:');
+    console.log('HOST:', process.env.EMAIL_HOST);
+    console.log('USER:', process.env.EMAIL_USER);
+    console.log('PASS length:', process.env.EMAIL_PASS?.length);
+    console.log('FROM:', process.env.EMAIL_FROM);
+    console.log('Actual password being used:', JSON.stringify(process.env.EMAIL_PASS));
+
+
+    const testConnection = async () => {
+      try {
+        await this.transporter.verify();
+        console.log('✅ SMTP connection successful');
+      } catch (error) {
+        console.error('❌ SMTP connection failed:', error as Error);
+      }
+    };
+
+    testConnection();
   }
+
 
   async sendVerificationEmail(email: string, verificationToken: string): Promise<void> {
     const verificationUrl = `${process.env.APP_URL}/api/auth/verify?token=${verificationToken}`;
